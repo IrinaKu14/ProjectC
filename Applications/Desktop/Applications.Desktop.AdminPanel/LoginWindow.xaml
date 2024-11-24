@@ -5,19 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectC.Applications.Desktop.AdminPanel"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="startButton" 
-                Content="Button Start" 
-                HorizontalAlignment="Center" 
-                Margin="0,100,0,0" VerticalAlignment="Top" 
-                Height="250" 
-                Width="600" 
-                RenderTransformOrigin="0.5,0.5" 
-                Click="ButtonClick">
+        Title="LoginWindow" Height="1000" Width="800">
+    <StackPanel>
+        <StackPanel Width="500" Height="300" Margin="0,0,0,20" Background="#FF268ED0">
+            <TextBox Margin="0,0,0,10">ВВЕДИТЕ ЛОГИН</TextBox>
+            <TextBox Margin="0,0,0,10">ВВЕДИТЕ ПАРОЛЬ</TextBox>
+            <Button Margin="0,0,0,10">ВОЙТИ</Button>
+            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                <Button Width="250">ЗАБЫЛИ ПАРОЛЬ</Button>
+                <Button Width="250">РЕГИСТРАЦИЯ</Button>
+            </StackPanel>
+        </StackPanel>
+        <Grid x:Name="mainGrid"  Width="500"  Height="150" Background="#FF1BF3EE">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВВЕДИТЕ ЛОГИН</TextBox>
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВВЕДИТЕ ПАРОЛЬ</TextBox>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВОЙТИ</Button>
            
-        </Button>
+        </Grid>
+        <Canvas Width="500" Height="150" Margin="0,10,0,10" Background="Lavender">
+            <Button Background="AliceBlue" Content="Top 20 Left 40" Canvas.Top="20" Canvas.Left="40" />
+            <Button Background="LightSkyBlue" Content="Top 20 Right 20" Canvas.Top="20" Canvas.Right="20"/>
+            <Button Background="Aquamarine" Content="Bottom 30 Left 20" Canvas.Bottom="30" Canvas.Left="20"/>
+            <Button Background="LightCyan" Content="Bottom 20 Right 40" Canvas.Bottom="20" Canvas.Right="40"/>
+        </Canvas>
 
 
-    </Grid>
+       
+
+    </StackPanel>
 </Window>
