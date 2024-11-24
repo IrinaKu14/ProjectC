@@ -23,14 +23,18 @@ namespace ProjectC.Applications.Desktop.AdminPanel
         public CalculatorWindow()
         {
             InitializeComponent();
+           
         }
 
         private void Calculate(object sender, RoutedEventArgs e)
         {
             var ex = mainField.Text;
             DataTable dt = new DataTable();
-           var result = dt.Compute(ex, string.Empty).ToString();
-           mainField.Text = result;
+            var result = dt.Compute(ex, string.Empty).ToString();
+            mainField.Text = result;
         }
     }
+
+    
+    
 }
