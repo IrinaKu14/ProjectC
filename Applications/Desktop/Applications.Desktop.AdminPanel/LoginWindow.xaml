@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВВЕДИТЕ ЛОГИН</TextBox>
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВВЕДИТЕ ПАРОЛЬ</TextBox>
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВОЙТИ</Button>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10" Click="ButtonClick">ВОЙТИ</Button>
            
         </Grid>
         <Canvas Width="500" Height="150" Margin="0,10,0,10" Background="Lavender">
