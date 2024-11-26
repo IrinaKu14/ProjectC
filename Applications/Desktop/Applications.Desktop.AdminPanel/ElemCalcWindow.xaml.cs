@@ -27,6 +27,7 @@ namespace ProjectC.Applications.Desktop.AdminPanel
                 Text = "Введите логин",
                 Margin = new Thickness(10),
                 
+                
             };
             var buttonTwo = new TextBox()
             {

@@ -9,4 +9,8 @@
 	<RootNamespace>ProjectC.Applications.Desktop.AdminPanel</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\SharedEntities\SharedEntities.csproj" />
+  </ItemGroup>
+
 </Project>
