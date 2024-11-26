@@ -20,25 +20,62 @@ namespace ProjectC.Applications.Desktop.AdminPanel
     /// </summary>
     public partial class UsersWindow : Window
     {
-        User user = new User()
+        //User user = new User()
+        //{
+        //    Id = 1,
+        //    FirstName = "Test",
+        //    SecondName = "TestTest",
+        //    Age = 20,
+        //    Gender = null
+
+        //};
+        User[] users = new User[3]
         {
+          new User()
+          {
             Id = 1,
             FirstName = "Test",
             SecondName = "TestTest",
             Age = 20,
             Gender = null
 
+          },
+          new User()
+          {
+            Id = 2,
+            FirstName = "Ivan",
+            SecondName = "Ivanov",
+            Age = 45,
+            Gender = true
+
+          },
+          new User()
+          {
+            Id = 3,
+            FirstName = "Irina",
+            SecondName = "Petrova",
+            Age = 23,
+            Gender = false
+
+          },
         };
+
         public UsersWindow()
         {
             InitializeComponent();
-           
-            this.DataContext = user;
+            usersDataGrid.ItemsSource = users;
+
+            //this.DataContext = user;
         }
 
         private void GetUserDataClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Id:{user.Id}, FirstName:{user.FirstName}, SecondName:{user.SecondName}");
+            var user = usersDataGrid.SelectedItem as User;
+            if  (user != null)
+            {
+                MessageBox.Show($"Id:{user.Id}, FirstName:{user.FirstName}, SecondName:{user.SecondName}");
+            }
+            //MessageBox.Show($"Id:{user.Id}, FirstName:{user.FirstName}, SecondName:{user.SecondName}");
         }
     }
 }
