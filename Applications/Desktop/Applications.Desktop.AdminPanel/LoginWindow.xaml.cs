@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectC.SharedEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace ProjectC.Applications.Desktop.AdminPanel
     /// </summary>
     public partial class LoginWindow : Window
     {
+        Login loginModel = new Login();
         public LoginWindow()
         {
             InitializeComponent();
@@ -43,14 +45,31 @@ namespace ProjectC.Applications.Desktop.AdminPanel
             mainGrid.Children.Add(buttonTwo);
             Grid.SetColumn(buttonTwo, 1);
             Grid.SetRow(buttonTwo, 3);
+
+            this.DataContext = loginModel;
         }
 
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
-            var window = new Elements();
-            window.Title = "Привет юзер";
-            window.Owner = this;
-            window.Show();  
+            if (string.IsNullOrEmpty(loginBox.Text))
+            {
+                loginBox.BorderBrush=new SolidColorBrush(Color.FromRgb(255,75,12));
+                MessageBox.Show("Введите логин!", "предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            //if (string.IsNullOrEmpty(passwordBox.Text))
+            //{
+            //    MessageBox.Show("Введите пароль!", "предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    return;
+            //}
+
+            MessageBox.Show($"Привет, {loginBox.Text}!", "Приветсвие", MessageBoxButton.OK, MessageBoxImage.Information);
+            //var window = new Elements();
+            //window.Title = "Привет юзер";
+            //window.Owner = this;
+            //window.Show();  
+
+
             //this.Close(); // закрытие текущего окна
 
             //var result = MessageBox.Show("Привет, мир!", "Приветственное окно", MessageBoxButton.YesNo, MessageBoxImage.Error);
