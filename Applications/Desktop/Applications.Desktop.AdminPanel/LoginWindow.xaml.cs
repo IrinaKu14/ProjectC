@@ -25,7 +25,7 @@ namespace ProjectC.Applications.Desktop.AdminPanel
 
             //< !--< Button Grid.Row = "3" Grid.Column = "0"  Margin = "10" > ЗАБЫЛИ ПАРОЛЬ ?</ Button >
             //< Button Grid.Row = "3" Grid.Column = "1"  Margin = "10" Width = "250" > РЕГИСТРАЦИЯ </ Button > -->
-
+           
             var buttonOne = new Button()
             {
                 Content = "ЗАБЫЛИ ПАРОЛЬ ?",
