@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjectC.Applications.Desktop.AdminPanel"
         mc:Ignorable="d"
         Title="UsersWindow" Height="450" Width="800">
-    <StackPanel Margin="10">
+    <!--<StackPanel Margin="10">
         <TextBlock FontSize="16" FontWeight="Bold">Id:</TextBlock>
         <TextBlock FontSize="16" FontWeight="Bold" Text ="{Binding Path=Id}"></TextBlock>
         <TextBlock FontSize="16" FontWeight="Bold">FirstName:</TextBlock>
@@ -17,7 +17,24 @@
         <TextBox FontSize="16" FontWeight="Bold" Text ="{Binding Path=Age}"></TextBox>
         <TextBlock FontSize="16" FontWeight="Bold">Gender</TextBlock>
         <CheckBox  IsChecked ="{Binding Path=Gender}"></CheckBox>
+        <Button FontSize="16" FontWeight="Bold" Content="Get user data!" Click="GetUserDataClick"></Button>-->
+
+    <!--</StackPanel>-->
+
+    <StackPanel Margin="10">
+        <DataGrid x:Name="usersDataGrid" AutoGenerateColumns="False" FontSize="16" FontWeight="Bold">
+            <DataGrid.Columns >
+              <DataGridTextColumn Header="Номер" Binding="{Binding Path=Id}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Path=FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=SecondName}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Пол" Binding="{Binding Path=Gender}"></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+                 
+        </DataGrid>
         <Button FontSize="16" FontWeight="Bold" Content="Get user data!" Click="GetUserDataClick"></Button>
 
     </StackPanel>
+    
+    
+    
 </Window>

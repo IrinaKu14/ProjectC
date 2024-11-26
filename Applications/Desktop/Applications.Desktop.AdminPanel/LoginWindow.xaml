@@ -27,8 +27,23 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВВЕДИТЕ ЛОГИН</TextBox>
-            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВВЕДИТЕ ПАРОЛЬ</TextBox>
+
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">Loign</TextBlock>
+            <TextBox x:Name="loginBox"  Grid.Row="0" Grid.Column="1" Margin="0,0,0,10"></TextBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,0,10">Password</TextBlock>
+            <TextBox x:Name="passwordBox"  Grid.Row="1" Grid.Column="1" Margin="0,0,0,10">
+                <TextBox.Text>
+                    <Binding Path="PasswordField">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule></DataErrorValidationRule>
+                        </Binding.ValidationRules>
+                        
+                    </Binding>
+                </TextBox.Text>
+                
+            </TextBox>
+                       
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10" Click="ButtonClick">ВОЙТИ</Button>
            
         </Grid>
