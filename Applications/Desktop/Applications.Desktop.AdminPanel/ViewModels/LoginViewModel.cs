@@ -1,0 +1,89 @@
+﻿using Applications.Desktop.AdminPanel;
+using ProjectC.Applications.Desktop.AdminPanel.Commands;
+using ProjectC.Applications.Desktop.AdminPanel.ViewModels.Abstract;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace ProjectC.Applications.Desktop.AdminPanel.ViewModels;
+
+public class LoginViewModel : INotifyPropertyChanged, IViewModel
+{
+    private ButtonCommand _loginCommand;
+    public ButtonCommand LoginCommand
+    {
+        get
+        {
+            if (_loginCommand == null)
+            {
+                _loginCommand = new ButtonCommand(LoginMethod);
+            }
+            return _loginCommand;
+        }
+        
+    }
+
+    private void LoginMethod(object? obj)
+    {
+        if (!string.IsNullOrEmpty(LoginField) && !string.IsNullOrEmpty(PasswordField))
+        {
+            MessageBoxYesNo?.Invoke("Work", "Test");
+            
+            //MessageBox.Show("Work"); // не должен вызываться
+
+            LoginField = "LoginField";
+            PasswordField = "PasswordField";
+        }
+    
+    }
+
+
+
+    #region Properties
+    private string _loginField;
+    public string LoginField 
+    { get
+        {
+            return _loginField;
+        }
+        set
+        {
+            _loginField = value;
+            OnPropertyChanged(nameof(LoginField));
+        }
+    }
+    private string _passwordField;
+    public string PasswordField
+    {
+        get
+        {
+            return _passwordField;
+        }
+        set
+        {
+            _passwordField = value;
+            OnPropertyChanged(nameof(PasswordField));
+        }
+    }
+
+    public Func<string, string, bool> MessageBoxYesNo { get; set; }
+
+   
+    #endregion
+
+
+    #region Implement INotifyPropertyChanged
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public void OnPropertyChanged(string name = "")
+    { 
+       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    }
+    #endregion
+
+}
