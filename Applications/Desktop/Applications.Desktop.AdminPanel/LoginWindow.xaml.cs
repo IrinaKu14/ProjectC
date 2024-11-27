@@ -1,4 +1,5 @@
-﻿using ProjectC.SharedEntities;
+﻿using ProjectC.Applications.Desktop.AdminPanel.ViewModels.Abstract;
+using ProjectC.SharedEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,18 @@ namespace ProjectC.Applications.Desktop.AdminPanel
     public partial class LoginWindow : Window
     {
         //Login loginModel = new Login();
-        public LoginWindow()
+        public LoginWindow(IViewModel viewModel)
         {
             InitializeComponent();
 
+            DataContext = viewModel;
+            viewModel.MessageBoxYesNo += ShowMessageBoxYesNo;
+
+
+
             //< !--< Button Grid.Row = "3" Grid.Column = "0"  Margin = "10" > ЗАБЫЛИ ПАРОЛЬ ?</ Button >
             //< Button Grid.Row = "3" Grid.Column = "1"  Margin = "10" Width = "250" > РЕГИСТРАЦИЯ </ Button > -->
-           
+
             //var buttonOne = new Button()
             //{
             //    Content = "ЗАБЫЛИ ПАРОЛЬ ?",
@@ -49,6 +55,12 @@ namespace ProjectC.Applications.Desktop.AdminPanel
             //this.DataContext = loginModel;
         }
 
+        private bool ShowMessageBoxYesNo(string message, string title)
+        {
+            var res = MessageBox.Show(message, title, MessageBoxButton.YesNo);
+            return res == MessageBoxResult.Yes;
+        }
+
         //private void ButtonClick(object sender, RoutedEventArgs e)
         //{
         //    if (string.IsNullOrEmpty(loginBox.Text))
@@ -57,34 +69,34 @@ namespace ProjectC.Applications.Desktop.AdminPanel
         //        MessageBox.Show("Введите логин!", "предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
         //        return;
         //    }
-            //if (string.IsNullOrEmpty(passwordBox.Text))
-            //{
-            //    MessageBox.Show("Введите пароль!", "предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    return;
-            //}
+        //if (string.IsNullOrEmpty(passwordBox.Text))
+        //{
+        //    MessageBox.Show("Введите пароль!", "предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //    return;
+        //}
 
-            //MessageBox.Show($"Привет, {loginBox.Text}!", "Приветсвие", MessageBoxButton.OK, MessageBoxImage.Information);
-            //var window = new Elements();
-            //window.Title = "Привет юзер";
-            //window.Owner = this;
-            //window.Show();  
+        //MessageBox.Show($"Привет, {loginBox.Text}!", "Приветсвие", MessageBoxButton.OK, MessageBoxImage.Information);
+        //var window = new Elements();
+        //window.Title = "Привет юзер";
+        //window.Owner = this;
+        //window.Show();  
 
 
-            //this.Close(); // закрытие текущего окна
+        //this.Close(); // закрытие текущего окна
 
-            //var result = MessageBox.Show("Привет, мир!", "Приветственное окно", MessageBoxButton.YesNo, MessageBoxImage.Error);
-            //if (result == MessageBoxResult.Yes)
-            //{
-            //    MessageBox.Show("Да", startButton.Content.ToString());
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Нет", startButton.Content.ToString());
-            //}
+        //var result = MessageBox.Show("Привет, мир!", "Приветственное окно", MessageBoxButton.YesNo, MessageBoxImage.Error);
+        //if (result == MessageBoxResult.Yes)
+        //{
+        //    MessageBox.Show("Да", startButton.Content.ToString());
+        //}
+        //else
+        //{
+        //    MessageBox.Show("Нет", startButton.Content.ToString());
+        //}
 
-            //test commnt
+        //test commnt
 
-            //}
+        //}
         //}
     }
 }

@@ -44,7 +44,7 @@
                 
             </TextBox>
                        
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">ВОЙТИ</Button>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10" Command="{Binding LoginCommand}">ВОЙТИ</Button>
             <Button Grid.Row="3" Grid.Column="0"  Margin="0,0,0,10">Забыли пароль?</Button>
             <Button Grid.Row="3" Grid.Column="1"  Margin="0,0,0,10">Регистрация</Button>
         </Grid>
