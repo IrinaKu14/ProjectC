@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace ProjectC.Applications.Desktop.AdminPanel.ViewModels;
 
-public class LoginViewModel : INotifyPropertyChanged, ILoginViewModal
+public class LoginNewViewModel : INotifyPropertyChanged, ILoginViewModal
 {
 
     #region Properties
@@ -72,6 +72,10 @@ public class LoginViewModel : INotifyPropertyChanged, ILoginViewModal
 
             LoginField = "LoginField";
             PasswordField = "PasswordField";
+        }
+        else
+        {
+            MessageBoxYesNo?.Invoke("Login or Password dont correct", "Info");
         }
 
     }
