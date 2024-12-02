@@ -22,7 +22,7 @@ namespace ProjectC.Applications.Desktop.AdminPanel
     public partial class LoginWindow : Window
     {
         //Login loginModel = new Login();
-        public LoginWindow(IViewModel viewModel)
+        public LoginWindow(ILoginViewModal viewModel)
         {
             InitializeComponent();
 

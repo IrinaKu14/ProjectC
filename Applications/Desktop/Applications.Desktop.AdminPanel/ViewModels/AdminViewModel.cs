@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace ProjectC.Applications.Desktop.AdminPanel.ViewModels;
 
-public class LoginViewModel : INotifyPropertyChanged, ILoginViewModal
+public class AdminViewModel : INotifyPropertyChanged, IViewModel
 {
 
     #region Properties
