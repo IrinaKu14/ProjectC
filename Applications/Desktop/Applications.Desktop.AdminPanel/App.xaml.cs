@@ -3,6 +3,7 @@ using ProjectC.Applications.Desktop.AdminPanel;
 using ProjectC.Applications.Desktop.AdminPanel.Configuration;
 using ProjectC.Applications.Desktop.AdminPanel.ViewModels;
 using ProjectC.Applications.Desktop.AdminPanel.ViewModels.Abstract;
+using Serilog;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -17,8 +18,18 @@ namespace Applications.Desktop.AdminPanel
         private IServiceProvider _serviceProvider;
         protected override void OnStartup(StartupEventArgs e)
         {
-           var services = new ServiceCollection();
+           Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Hour, outputTemplate:
+                "{Timestamp:yyyy-mm-dd HH:mm:ss. fff zzz} [{level:u3}] {Message:lj}{NewLine}{Exception}")
+                .CreateLogger();
+            
+            
+            
+            var services = new ServiceCollection();
 
+            services.AddSerilog(Log.Logger);
+            services.AddLogging(opt => opt.AddSerilog(Log.Logger));
+           
             services.RegisterViews();
             services.RegisterViewModels();
 
