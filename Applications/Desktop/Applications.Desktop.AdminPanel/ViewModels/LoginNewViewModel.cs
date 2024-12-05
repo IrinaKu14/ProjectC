@@ -64,6 +64,7 @@ public class LoginNewViewModel : INotifyPropertyChanged, ILoginViewModal
 
     private void LoginMethod(object? obj)
     {
+        
         if (!string.IsNullOrEmpty(LoginField) && !string.IsNullOrEmpty(PasswordField))
         {
             MessageBoxYesNo?.Invoke("Work", "Test");

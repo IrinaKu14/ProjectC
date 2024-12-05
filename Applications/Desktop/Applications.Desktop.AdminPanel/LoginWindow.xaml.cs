@@ -1,4 +1,6 @@
-﻿using ProjectC.Applications.Desktop.AdminPanel.ViewModels.Abstract;
+﻿using Applications.Desktop.AdminPanel;
+using ProjectC.Applications.Desktop.AdminPanel.ViewModels;
+using ProjectC.Applications.Desktop.AdminPanel.ViewModels.Abstract;
 using ProjectC.SharedEntities;
 using System;
 using System.Collections.Generic;
@@ -21,13 +23,17 @@ namespace ProjectC.Applications.Desktop.AdminPanel
     /// </summary>
     public partial class LoginWindow : Window
     {
-        //Login loginModel = new Login();
-        public LoginWindow(ILoginViewModal viewModel)
+        
+        public LoginWindow(ILoginViewModal viewModel, ApplicationUser user)
         {
+            //_loginViewModel = viewModel;
+
+
             InitializeComponent();
 
             DataContext = viewModel;
             viewModel.MessageBoxYesNo += ShowMessageBoxYesNo;
+            //ShowMessageBoxYesNo(user.Name, "User");
 
 
 

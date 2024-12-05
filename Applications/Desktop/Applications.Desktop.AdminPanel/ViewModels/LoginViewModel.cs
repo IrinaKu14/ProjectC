@@ -1,4 +1,5 @@
 ﻿using Applications.Desktop.AdminPanel;
+using Microsoft.Extensions.Logging;
 using ProjectC.Applications.Desktop.AdminPanel.Commands;
 using ProjectC.Applications.Desktop.AdminPanel.ViewModels.Abstract;
 using System;
@@ -13,6 +14,12 @@ namespace ProjectC.Applications.Desktop.AdminPanel.ViewModels;
 
 public class LoginViewModel : INotifyPropertyChanged, ILoginViewModal
 {
+    private readonly ILogger<LoginViewModel> _logger;
+    
+    public LoginViewModel(ILogger<LoginViewModel> logger) 
+    {
+        _logger = logger;
+    }
 
     #region Properties
     private string _loginField;
@@ -64,15 +71,33 @@ public class LoginViewModel : INotifyPropertyChanged, ILoginViewModal
 
     private void LoginMethod(object? obj)
     {
-        if (!string.IsNullOrEmpty(LoginField) && !string.IsNullOrEmpty(PasswordField))
+
+        try
         {
-            MessageBoxYesNo?.Invoke("Work", "Test");
 
-            //MessageBox.Show("Work"); // отсюда лучше не вызывать уведомление
+            _logger.LogInformation($"Login button click. Login: {LoginField}. Password: {PasswordField}.");
+            if (!string.IsNullOrEmpty(LoginField) && !string.IsNullOrEmpty(PasswordField))
+            {
+                _logger.LogInformation($"Login for user {LoginField} is OK.");
 
-            LoginField = "LoginField";
-            PasswordField = "PasswordField";
+
+                MessageBoxYesNo?.Invoke("Work", "Test");
+
+                throw new Exception("Database ERROR.");
+
+                //MessageBox.Show("Work"); // отсюда лучше не вызывать уведомление
+
+                //LoginField = "LoginField";
+                //PasswordField = "PasswordField";
+            }
+
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error in login.");
+        }
+        
+        
 
     }
     #endregion
