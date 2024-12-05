@@ -19,7 +19,7 @@ public static class MvvmServiceCollectionExtension
 
     public static void RegisterViewModels(this ServiceCollection services)
     {
-        services.AddScoped<ILoginViewModal, LoginNewViewModel>();
+        services.AddScoped<ILoginViewModal, LoginViewModel>();
     }
 
 }

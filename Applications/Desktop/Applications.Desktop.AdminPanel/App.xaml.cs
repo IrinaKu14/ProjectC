@@ -22,7 +22,7 @@ namespace Applications.Desktop.AdminPanel
                 .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Hour, outputTemplate:
                 "{Timestamp:yyyy-mm-dd HH:mm:ss. fff zzz} [{level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
-            
+            Log.Logger.Information("test");
             
             
             var services = new ServiceCollection();
