@@ -9,24 +9,37 @@ namespace Applications.Web.ApiApp.Controllers
     [Route("api/account")]
     public class AccountController : ControllerBase
     {
-        [HttpPost]
+        [HttpPost("~/login")]
         [ProducesResponseType<LoginResponse>(StatusCodes.Status200OK)]
         [ProducesResponseType<ErrorResponse>(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType<ErrorResponse>(StatusCodes.Status500InternalServerError)]
         [SwaggerRequestExample(typeof(LoginRequest), typeof(LoginRequestExample))]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            if (request.Login == "Irina")
+            try
             {
-                return Ok(new LoginResponse()
+                if (request.Login == "Irina")
                 {
-                    Token = $"hello {request.Login}"
+                    return Ok(new LoginResponse()
+                    {
+                        Token = $"hello {request.Login}"
+                    });
+                }
+
+                return BadRequest(new ErrorResponse()
+                {
+                    Message = "User not found"
+                });
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ErrorResponse()
+                {
+                    Message = "Unexpected error"
                 });
             }
-
-            return BadRequest( new ErrorResponse()
-                { 
-                    Message ="User not found"
-                });
+                      
         }
         
 
