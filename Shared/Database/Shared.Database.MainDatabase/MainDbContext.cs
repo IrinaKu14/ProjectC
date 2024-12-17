@@ -11,11 +11,12 @@ namespace Shared.Database.MainDatabase;
 public class MainDbContext : DbContext
 {    
     public DbSet<User> Users { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
     public MainDbContext()
     {
-        //Database.EnsureDeleted();
-        Database.EnsureCreated();
+        
+        //Database.EnsureCreated();
         //Database.EnsureDeleted();
     }
 
@@ -23,7 +24,7 @@ public class MainDbContext : DbContext
     {
         //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=main_db;Username=main_user;Password=main_password");
 
-        optionsBuilder.UseSqlite("Data Source=test_db_study_2024_11.db");
+        optionsBuilder.UseSqlite("Data Source=C:\\Users\\User\\Desktop\\IrinaC\\test_db_study_2024_11.db");
     
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
