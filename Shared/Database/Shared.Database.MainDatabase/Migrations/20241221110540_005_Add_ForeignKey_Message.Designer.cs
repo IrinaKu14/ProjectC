@@ -10,14 +10,38 @@ using Shared.Database.MainDatabase;
 namespace Shared.Database.MainDatabase.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20241217060842_0002_Add_Column_To_User")]
-    partial class _0002_Add_Column_To_User
+    [Migration("20241221110540_005_Add_ForeignKey_Message")]
+    partial class _005_Add_ForeignKey_Message
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
+
+            modelBuilder.Entity("ProjectC.SharedEntities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorID");
+
+                    b.ToTable("Messages");
+                });
 
             modelBuilder.Entity("ProjectC.SharedEntities.User", b =>
                 {
@@ -39,7 +63,7 @@ namespace Shared.Database.MainDatabase.Migrations
                     b.Property<bool?>("Gender")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActiv")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PasswordHash")
@@ -62,10 +86,20 @@ namespace Shared.Database.MainDatabase.Migrations
                             Email = "admin@mail.ru",
                             FirstName = "Admin",
                             Gender = true,
-                            IsActive = false,
                             PasswordHash = "password",
                             SecondName = "Main"
                         });
+                });
+
+            modelBuilder.Entity("ProjectC.SharedEntities.Message", b =>
+                {
+                    b.HasOne("ProjectC.SharedEntities.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
                 });
 #pragma warning restore 612, 618
         }

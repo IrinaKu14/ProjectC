@@ -10,8 +10,8 @@ using Shared.Database.MainDatabase;
 namespace Shared.Database.MainDatabase.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20241217063217_003_Add_ Messages")]
-    partial class _003_Add_Messages
+    [Migration("20241223162859_007 Add_atributs")]
+    partial class _007Add_atributs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,21 +21,28 @@ namespace Shared.Database.MainDatabase.Migrations
 
             modelBuilder.Entity("ProjectC.SharedEntities.Message", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UniqId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AuthorID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Body")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("message_body");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("UniqId");
 
-                    b.ToTable("Messages");
+                    b.HasIndex("AuthorID");
+
+                    b.ToTable("main_messages", (string)null);
                 });
 
             modelBuilder.Entity("ProjectC.SharedEntities.User", b =>
@@ -58,11 +65,8 @@ namespace Shared.Database.MainDatabase.Migrations
                     b.Property<bool?>("Gender")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActiv")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -84,10 +88,25 @@ namespace Shared.Database.MainDatabase.Migrations
                             Email = "admin@mail.ru",
                             FirstName = "Admin",
                             Gender = true,
-                            IsActive = false,
                             PasswordHash = "password",
                             SecondName = "Main"
                         });
+                });
+
+            modelBuilder.Entity("ProjectC.SharedEntities.Message", b =>
+                {
+                    b.HasOne("ProjectC.SharedEntities.User", "Producer")
+                        .WithMany("Message")
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("ProjectC.SharedEntities.User", b =>
+                {
+                    b.Navigation("Message");
                 });
 #pragma warning restore 612, 618
         }

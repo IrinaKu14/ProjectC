@@ -5,7 +5,7 @@
 namespace Shared.Database.MainDatabase.Migrations
 {
     /// <inheritdoc />
-    public partial class _003_Add_Messages : Migration
+    public partial class _004_Add_Message : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

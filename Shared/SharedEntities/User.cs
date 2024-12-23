@@ -14,9 +14,9 @@ public class User
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     public int Age { get; set; }
-    public bool? Gender { get; set; }  
-    public bool IsActive {  get; set; }
+    public bool? Gender { get; set; }
+    public bool? IsActiv { get; set; }
 
-    public string? Name { get; set; }
-
+    public ICollection<Message> Message { get; set; }
+     
 }
