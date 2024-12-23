@@ -5,7 +5,7 @@
 namespace Shared.Database.MainDatabase.Migrations
 {
     /// <inheritdoc />
-    public partial class _0001_Initial_Migration : Migration
+    public partial class _001_Initial_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +21,8 @@ namespace Shared.Database.MainDatabase.Migrations
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
                     Age = table.Column<int>(type: "INTEGER", nullable: false),
-                    Gender = table.Column<bool>(type: "INTEGER", nullable: true)
+                    Gender = table.Column<bool>(type: "INTEGER", nullable: true),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,8 +31,8 @@ namespace Shared.Database.MainDatabase.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Age", "Email", "FirstName", "Gender", "PasswordHash", "SecondName" },
-                values: new object[] { 1, 50, "admin@mail.ru", "Admin", true, "password", "Main" });
+                columns: new[] { "Id", "Age", "Email", "FirstName", "Gender", "IsActive", "PasswordHash", "SecondName" },
+                values: new object[] { 1, 50, "admin@mail.ru", "Admin", true, false, "password", "Main" });
         }
 
         /// <inheritdoc />

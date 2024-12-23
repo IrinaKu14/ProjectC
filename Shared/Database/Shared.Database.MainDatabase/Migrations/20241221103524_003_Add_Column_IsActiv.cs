@@ -5,31 +5,30 @@
 namespace Shared.Database.MainDatabase.Migrations
 {
     /// <inheritdoc />
-    public partial class _0002_Add_Column_To_User : Migration
+    public partial class _003_Add_Column_IsActiv : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "IsActive",
+                name: "IsActiv",
                 table: "Users",
                 type: "INTEGER",
-                nullable: false,
-                defaultValue: false);
+                nullable: true);
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
-                column: "IsActive",
-                value: false);
+                column: "IsActiv",
+                value: null);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsActive",
+                name: "IsActiv",
                 table: "Users");
         }
     }

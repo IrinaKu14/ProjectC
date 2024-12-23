@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectC.SharedEntities;
+using Shared.Database.MainDatabase.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,8 @@ public class MainDbContext : DbContext
         PasswordHash="password",
         Gender = true,
         });
+
+        modelBuilder.ApplyConfiguration(new MessageCreatingConfiguration());
     }
 
 }
