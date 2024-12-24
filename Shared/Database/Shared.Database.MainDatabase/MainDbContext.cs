@@ -37,7 +37,7 @@ public class MainDbContext : DbContext
         FirstName="Admin",
         SecondName="Main",
         Age=50,
-        Email="admin@mail.ru",
+        Email="admin@mail.com",
         PasswordHash="password",
         Gender = true,
         });

@@ -1,5 +1,5 @@
 using Swashbuckle.AspNetCore.Filters;
-
+using Shared.Database.MainDatabase.Configuration;
 namespace Applications.Web.ApiApp
 {
     public class Program
@@ -9,6 +9,8 @@ namespace Applications.Web.ApiApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddMainDataBase();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

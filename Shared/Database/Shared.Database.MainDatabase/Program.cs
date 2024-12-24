@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectC.SharedEntities;
+using Shared.Database.MainDatabase.Repositories;
 
 namespace Shared.Database.MainDatabase;
 
@@ -10,6 +11,33 @@ internal class Program
         Console.WriteLine("Hello, World!");
 
         var dbContext = new MainDbContext();
+        var repo = new MessageRepository(dbContext);
+
+       var message = repo.Get(1);
+        if (message != null)
+        {
+            Console.WriteLine(message.Body);
+        }
+
+        //repo.GetRangeByIds([1, 2, 3 ], 10);
+        //var b = repo.Update(new Message()
+        //{ 
+        //    AuthorID = 1,
+        //    Body = "Hellow",
+        //    Title = "Test",
+        //    UniqId = 1,    
+        //});
+
+        //if (b)
+        //{
+        //    Console.WriteLine("OK");
+        //}
+        //else
+        //{
+        //    Console.WriteLine("Повторите позже");
+        //}
+
+
         //dbContext.Messages.Add(new Message()
         //{
         //    Body = "cs",
@@ -19,8 +47,8 @@ internal class Program
         //});
 
         //dbContext.SaveChanges();
-        var mes = dbContext.Messages.Include(x => x.Producer). FirstOrDefault();
-        Console.WriteLine(mes.Producer.Email);
+        //var mes = dbContext.Messages.Include(x => x.Producer). FirstOrDefault();
+        //Console.WriteLine(mes.Producer.Email);
 
 
         ////dbContext.Users.Add(new User()
