@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectC;
 
-public class MemoryStorage
+public class MemoryStorage : IStorage
 {
     private Dictionary<string, string> 
         _memory = new Dictionary<string, string>();
@@ -26,5 +26,17 @@ public class MemoryStorage
             return _memory[name];
         }
         return null;
+        //SetString(new string[] { "1", "2" });
+        //SetString(new List<string> { "3", "4" });
+    }
+
+    public string SetString()//IEnumerable<string> array)
+    {
+        //foreach (var item in array)
+        //{
+        //    //
+        //}
+
+        return string.Empty;
     }
 }

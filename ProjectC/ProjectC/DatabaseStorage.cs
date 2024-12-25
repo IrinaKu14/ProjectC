@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectC;
 
-public class DatabaseStorage
+public class DatabaseStorage : IStorage
 {
     private Dictionary<string, string> 
         _memory = new Dictionary<string, string>();

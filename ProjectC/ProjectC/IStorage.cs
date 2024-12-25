@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectC
 {
-    internal interface IStorage
+    public interface IStorage
     {
+        public void SetValue(string name, string vallue);
+        public string? GetValue(string name);
     }
 }
