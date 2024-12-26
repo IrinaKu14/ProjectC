@@ -5,11 +5,14 @@ namespace ProjectC;
 //[Table("main_messages")]
 public class Program
 {
+    public static List<int> ints = new List<int>() {1,2,3,4,5,8,6,7,3 };
     public static void Main(string[] args)
     {
-        Console.WriteLine("Start Main!");
-        Method1();
-        Console.WriteLine("End Main!");
+        //Console.WriteLine("Start Main!");
+        //Method1((a) => a <4);
+        //Console.WriteLine("Method Main!");
+        //Method1((a) => a >= 4);
+        //Console.WriteLine("End Main!");
         //Console.WriteLine("Hello, World!");
         //var str = "jfhkdjfg";
         //Console.WriteLine(str.RemoveModTwo());
@@ -43,9 +46,51 @@ public class Program
         //{ 
         //    Console.WriteLine($"{item}");
         //}
+        //Method2(() => 
+        //{
+        //    Console.ForegroundColor = ConsoleColor.Green;
+        //    Console.WriteLine("Error");
+        //});
 
+        var car = new Car((mes) =>
+        {
+            Console.WriteLine("Отправка данных_____________");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(mes);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Отправка данных_____________");
+        });
+        car.Move(10);
+        car.Move(110);
+        car.Move(120);
+        car.Move(10);
 
     }
+    public static void Method1(Predicate<int> func)
+    {
+        foreach (var item in ints)
+        {
+            if (func(item))
+            {
+                Console.WriteLine(item);
+            }        
+        }
+    }
+    public static void Method2(Action func)
+    {
+        Console.WriteLine("Start work!");
+        Console.WriteLine("Error");
+        func();
+    }
+
+    //public static bool Sort1(int a)
+    //{
+    //    return a < 4;
+    //}
+    //public static bool Sort2(int a)
+    //{
+    //    return a >= 4;
+    //}
 
     //    public static void UserPanel(IStorage storage)
     //    {
@@ -88,47 +133,79 @@ public class Program
     //    }
 
     //Размотка стека
-    public static void Method1()
-    {
-        Console.WriteLine("Start Method1!");
-        try
-        {
-            Method2();
-        }
-        catch(DatabaseException e)
-        {
-            Console.WriteLine($"Error: {e.Message}!");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Unknown exception!!!");
-        }
+    //public static void Method1()
+    //{
+    //    //Console.WriteLine("Start Method1!");
+    //    //try
+    //    //{
+    //    //    Method2();
+    //    //}
+    //    //catch(DatabaseException e)
+    //    //{
+    //    //    Console.WriteLine($"Error: {e.Message}!");
+    //    //}
+    //    //catch (Exception e)
+    //    //{
+    //    //    Console.WriteLine($"Unknown exception!!!");
+    //    //}
 
-        Console.WriteLine("End Method1!");
+    //    //Console.WriteLine("End Method1!");
+    //}
 
-    }
-    public static void Method2()
-    {
-        Console.WriteLine("Start Method2!");
-        Method3();
-        Console.WriteLine("End Method2!");
 
-    }
-    public static void Method3()
-    {
-        Console.WriteLine("Start Method3!");
-        //throw new DatabaseException("Error connect to database");/* Error*/
-        throw new Exception("Unknown exception");
-        Console.WriteLine("End Method3!");
+    //public static void Method2()
+    //{
+    //    //Console.WriteLine("Start Method2!");
+    //    //Method3();
+    //    //Console.WriteLine("End Method2!");
+    //}
 
-    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <exception cref="DatabaseException"></exception>
+    /// <exception cref="Exception"></exception>
+    //    public static void Method3()
+    //    {
+    //        Console.WriteLine("Start Method3!");
+    //        int a = 3;
+    //        if (a == 0)
+    //        {
+    //          throw new DatabaseException("Error connect to database");/* Error*/
+    //        }
+    //        if (a == 1)
+    //        {
+    //            throw new Exception("Unknown exception");
+    //        }
+    //        Console.WriteLine("End Method3!");
+
+    //    }
+    //}
+
+    //public class DatabaseException : Exception
+    //{
+    //    public DatabaseException(string message) : base(message)
+    //    { 
+
+    //    }
+
 }
+public class Car
+{ 
+    private Action<string> _signal;
 
-public class DatabaseException : Exception
-{
-    public DatabaseException(string message) : base(message)
-    { 
-    
+    public Car(Action<string> signal)
+    {
+        _signal = signal;
     }
-
+    public void Move(int distance)
+    {
+        Console.WriteLine($"Start move {distance}!");
+        if (distance > 100)
+        {
+            _signal.Invoke("Нужна заправка");
+        }
+        Console.WriteLine($"End move {distance}!");
+    }
 }
