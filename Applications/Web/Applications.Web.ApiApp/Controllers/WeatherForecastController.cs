@@ -1,9 +1,12 @@
 using Applications.Web.ApiApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Applications.Web.ApiApp.Controllers
 {
     [ApiController]
+    [Authorize("AdminPolicy")]
+
     [Route("api/weather-forecast")]
     public class WeatherForecastController : ControllerBase
     {
