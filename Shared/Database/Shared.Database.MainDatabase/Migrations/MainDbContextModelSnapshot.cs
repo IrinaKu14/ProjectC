@@ -69,6 +69,10 @@ namespace Shared.Database.MainDatabase.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("SecondName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -86,6 +90,7 @@ namespace Shared.Database.MainDatabase.Migrations
                             FirstName = "Admin",
                             Gender = true,
                             PasswordHash = "password",
+                            PasswordSalt = "password1",
                             SecondName = "Main"
                         });
                 });
