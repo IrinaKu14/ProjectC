@@ -11,13 +11,30 @@ internal class Program
         Console.WriteLine("Hello, World!");
 
         var dbContext = new MainDbContext();
-        var repo = new MessageRepository(dbContext);
+        //var repo = new MessageRepository(dbContext);
+        var repo = new UserRepository(dbContext);
+        Console.WriteLine(repo.VerifyPassword(2, "hjgjhj"));
+        Console.WriteLine(repo.VerifyPassword(2, "dfsjgfgug"));
+        Console.WriteLine(repo.VerifyPassword(2, "passwordtest"));
 
-       var message = repo.Get(1);
-        if (message != null)
-        {
-            Console.WriteLine(message.Body);
-        }
+        //repo.Create(new User()
+        //{
+        //    Email = "testPass@gmail.com",
+        //    PasswordHash = "passwordtest",
+        //    Age = 30,
+        //    Gender = true,
+        //    IsActiv = true,
+        //    FirstName = "Masha",
+        //    SecondName = "Petrova"
+
+        //});
+
+
+        //var message = repo.Get(1);
+        // if (message != null)
+        // {
+        //     Console.WriteLine(message.Body);
+        // }
 
         //repo.GetRangeByIds([1, 2, 3 ], 10);
         //var b = repo.Update(new Message()

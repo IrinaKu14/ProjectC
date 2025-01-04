@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Applications.Web.ApiApp
 {
@@ -17,6 +18,7 @@ namespace Applications.Web.ApiApp
 
             // Add services to the container.
 
+            
             builder.Services.AddMainDataBase();
             builder.Services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
