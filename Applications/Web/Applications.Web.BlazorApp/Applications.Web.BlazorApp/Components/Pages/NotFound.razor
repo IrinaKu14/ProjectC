@@ -1,0 +1,17 @@
+﻿@page "/not-found/{ResponceCode:int}"
+<h3>NotFound @ResponceCode</h3>
+ 
+@if (ResponceCode == 404)
+{
+    <h3>Page Not Found </h3>
+}
+@if (ResponceCode == 401)
+{
+    <h3>Unautorized</h3>
+}
+
+
+@code {
+    [Parameter]
+    public int ResponceCode { get; set; }
+}
