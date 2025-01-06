@@ -1,11 +1,12 @@
 using Applications.Web.ApiApp.Models;
+using Applications.Web.Shared.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Applications.Web.ApiApp.Controllers
 {
     [ApiController]
-    [Authorize("AdminPolicy")]
+    //[Authorize("AdminPolicy")]
 
     [Route("api/weather-forecast")]
     public class WeatherForecastController : ControllerBase
@@ -28,7 +29,7 @@ namespace Applications.Web.ApiApp.Controllers
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })

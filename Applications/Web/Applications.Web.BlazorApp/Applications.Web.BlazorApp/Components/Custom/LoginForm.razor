@@ -1,17 +1,31 @@
-﻿<h3>LoginForm</h3>
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Applications.Web.Shared.Models
+<h3>LoginForm</h3>
 
 <div class="text-center">
     <h1 class="display-4">Login @SessionId (@UserId):</h1>
-    <form method="post">        
+   @*  <form method="post">        
         <input asp-for="Login"/>       
         <br />
         <input asp-for="Password" />       
         <br />
-        @* <input type="submit" /> *@        
+        <input type="submit" />        
 
-    </form>
+    </form>  *@
 
     <button @onclick="@(async() => await OnSubmitButtonCallback.InvokeAsync(542))">Login</button>
+
+    <EditForm Model="@loginData" OnValidSubmit="SubmitButton" FormName="main-form">
+        <DataAnnotationsValidator> </DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <InputText id="login" @bind-Value="loginData.Login"></InputText>
+        <InputText id="password" @bind-Value="loginData.Password"></InputText>
+        <button type="submit">Button</button>
+
+    </EditForm>
+
+    <p>@message</p>
+
 </div>
 @code {
     [Parameter]
@@ -21,5 +35,13 @@
     public string UserId { get; set; }
 
     [Parameter]
-    public EventCallback<int> OnSubmitButtonCallback { get; set; } 
+    public EventCallback<int> OnSubmitButtonCallback { get; set; }
+
+    public LoginRequest loginData = new LoginRequest();
+    public string message = "";
+    public async Task SubmitButton()
+    {
+        message = "work";
+    }
+
 }
