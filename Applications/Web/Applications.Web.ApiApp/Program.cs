@@ -17,8 +17,17 @@ namespace Applications.Web.ApiApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
 
-            
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .WithOrigins("https://localhost:7166/api/account/login");
+                });
+            });
+
             builder.Services.AddMainDataBase();
             builder.Services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -79,6 +88,8 @@ namespace Applications.Web.ApiApp
             builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
           var app = builder.Build();
+
+            app.UseCors();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
