@@ -11,7 +11,7 @@ namespace ProjectC.SharedEntities;
 //[Table("main_messages")]
 public class Message
 {
-    //[Key]
+    [Key]
     public int UniqId { get; set; }
     public string Title { get; set; }
     //[Column("message_body")]
