@@ -25,7 +25,7 @@
     }
     private async Task LoginButton()
     {
-        var result = await httpClient.PostAsJsonAsync("https://localhost:7166/api/account/login", new LoginRequest()
+        var result = await httpClient.PostAsJsonAsync("account/login", new LoginRequest()
     { Login = "Irina", Password = "password"});
         if (result.IsSuccessStatusCode)
         {

@@ -25,8 +25,8 @@ public class MainDbContext : DbContext
     {
         //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=main_db;Username=main_user;Password=main_password");
 
-        optionsBuilder.UseSqlite("Data Source=C:\\Users\\User\\Desktop\\IrinaC\\test_db_study_2024_11.db");
-    
+        //optionsBuilder.UseSqlite("Data Source=C:\\Users\\User\\Desktop\\IrinaC\\test_db_study_2024_11.db");
+        optionsBuilder.UseSqlServer("workstation id=StudyDatabase14.mssql.somee.com;packet size=4096;user id=IrinaKu;pwd=IrinaKu14;data source=StudyDatabase14.mssql.somee.com;persist security info=False;initial catalog=StudyDatabase14;TrustServerCertificate=True");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

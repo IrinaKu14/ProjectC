@@ -13,9 +13,9 @@ internal class Program
         var dbContext = new MainDbContext();
         //var repo = new MessageRepository(dbContext);
         var repo = new UserRepository(dbContext);
-        Console.WriteLine(repo.VerifyPassword(2, "hjgjhj"));
-        Console.WriteLine(repo.VerifyPassword(2, "dfsjgfgug"));
-        Console.WriteLine(repo.VerifyPassword(2, "passwordtest"));
+        //Console.WriteLine(repo.VerifyPassword(2, "hjgjhj"));
+        //Console.WriteLine(repo.VerifyPassword(2, "dfsjgfgug"));
+        //Console.WriteLine(repo.VerifyPassword(2, "passwordtest"));
 
         //repo.Create(new User()
         //{
@@ -130,12 +130,12 @@ internal class Program
 
         //Console.WriteLine("===================================");
 
-        //users = dbContext.Users.Where(u => u.Age > 25);//.Skip(10).Take(10);
-        //foreach (var u in users)
-        //{
-        //    Console.WriteLine($" User found. ID:{u.Id}, Name: {u.FirstName}.");
+        var users = dbContext.Users.Where(u => u.Age > 25);//.Skip(10).Take(10);
+        foreach (var u in users)
+        {
+            Console.WriteLine($" User found. ID:{u.Id}, Name: {u.FirstName}.");
 
-        //}
+        }
 
     }
 

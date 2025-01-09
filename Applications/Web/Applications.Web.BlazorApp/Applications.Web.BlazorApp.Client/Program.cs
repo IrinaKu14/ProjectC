@@ -10,7 +10,7 @@ namespace Applications.Web.BlazorApp.Client
             builder.Services.AddScoped(e =>
                 new HttpClient()
                 {
-                    //BaseAddress = new Uri("https://localhost:7166/api/")
+                    BaseAddress = new Uri("https://localhost:7166/api/")
                 }
             );
 
