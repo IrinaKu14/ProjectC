@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Confluent.Kafka;
+using Shared.Database.ClickHouse;
+using System.Text;
+using System.Text.Json;
 using System.Threading;
 
 namespace ProjectC;
@@ -212,79 +215,178 @@ public class Program
     //    }
     //}
 
-    public static async Task  Main(string[] args)
+    //public static async Task  Main(string[] args)
+    //{
+    //    ////Task - задача
+    //    ////Thread - поток
+    //    ////var thread = new Task<int>(() => Method1(1));
+    //    ////thread.Start();
+    //    ////Task thread1 = new Task(() => Method1(2));
+    //    ////thread1.Start();
+    //    //////Method1(0);
+    //    //////thread.Wait();
+    //    ////Console.WriteLine(thread.Result);
+    //    ////thread1.Wait();
+    //    //Console.WriteLine("Start");
+    //    //var s1 = Method1(1);      
+    //    //var s2 = Method1(2);       
+    //    //var s3 = Method1(3);      
+    //    //var s4 = Method1(4);
+
+    //    //for (int i = 0; i < 10; i++)
+    //    //{
+    //    //   Console.WriteLine(i+1);
+    //    //}
+    //    //Console.WriteLine(await s1);
+    //    //Console.WriteLine(await s2);
+    //    //Console.WriteLine(await s3);
+    //    //Console.WriteLine(await s4);
+    //    //Console.WriteLine("Finish");
+    //    var ts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+    //    var token = ts.Token;
+
+    //    var ar = Method1();
+    //    Console.WriteLine(ar);
+    //    var b = Method2Async(ar);
+
+    //    var cr = Method3();
+    //    Console.WriteLine(cr);
+
+    //    var br = await b;
+    //    Console.WriteLine(br);
+    //    var dr = Method4(br, cr);
+    //    Console.WriteLine(dr);
+
+
+    //}
+    //public static string Method1()
+    //{
+    //    //for (int i = 0; i < 10; i++)
+    //    //{ 
+    //    //    Thread.Sleep(1000);
+    //    //    Console.WriteLine($"{number} - {i+1}");
+    //    //}
+    //    //Thread.Sleep(1000);
+    //    Thread.Sleep(2000);
+    //    return  $"Неготовое тесто.";
+
+    //}
+    //public static async Task<string> Method2Async(string str)
+    //{        
+    //    await Task.Delay(1000);
+    //    return $"Тесто из {str}";
+
+    //}
+    //public static string Method3()
+    //{
+    //    Thread.Sleep(2000);
+    //    return $"Фарш";
+
+    //}
+    //public static string Method4(string str, string str2)
+    //{
+    //    Thread.Sleep(2000);
+    //    return $"Пельмени = {str} + {str2}";
+
+    //}
+    //    public static void Main(string[] args)
+    //    {
+    //        //var producerConfig = new ProducerConfig()
+    //        //{
+    //        //    BootstrapServers = "localhost:9092",
+    //        //    ClientId = "Main-Client",
+
+    //        //};
+
+    //        //var producer = new ProducerBuilder<string, MyMessage>(producerConfig)
+    //        //    .SetValueSerializer(new MyJsonSerializer())
+    //        //    .Build();
+
+    //        //var kafkaMessage = new Message<string, MyMessage>()
+    //        //{
+    //        //    Key = Guid.NewGuid().ToString(),
+    //        //    Value = new MyMessage()
+    //        //    {
+    //        //        Id = 1,
+    //        //        Name = "aaaa",
+    //        //        Value = "11111"
+    //        //    }
+    //        //};
+
+    //        //producer.Produce("first_topic", kafkaMessage);
+    //        //Console.WriteLine("producer.ToString()");
+    //        //Console.ReadLine();
+    //        var consumerConfig = new ConsumerConfig()
+    //        {
+    //            BootstrapServers = "localhost:9092",
+    //            GroupId = "main-consumer",
+    //            AutoOffsetReset = AutoOffsetReset.Earliest,
+    //        };
+
+    //        var consumer = new ConsumerBuilder<string, MyMessage>(consumerConfig)
+    //            .SetValueDeserializer(new MyJsonSerializer())
+    //            .Build();
+
+    //        consumer.Subscribe("first_topic");
+
+    //        while (true)
+    //        {
+    //            try
+    //            {
+    //                var mes = consumer.Consume();
+    //                Console.WriteLine($"{mes.Message.Key} {mes.Message.Value.Id} {mes.Message.Value.Name}");
+    //            }
+
+    //            catch(Exception e)
+    //            {
+    //                Console.WriteLine(e);
+    //            }
+    //        }
+    //    }
+    //    public class MyMessage
+    //    {
+    //        public int Id { get; set; }
+    //        public string Name { get; set; }
+    //        public string Value { get; set; }
+    //    }
+
+    //    public class MyJsonSerializer : ISerializer<MyMessage>, IDeserializer<MyMessage>
+    //    {
+    //        public MyMessage Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
+    //        {
+    //            return (MyMessage)JsonSerializer.Deserialize(data, typeof (MyMessage));
+    //        }
+
+    //        public byte[] Serialize(MyMessage data, SerializationContext context)
+    //        {
+    //            return JsonSerializer.SerializeToUtf8Bytes(data);
+    //        }
+
+    //    }
+
+    public static async Task Main(string[] args)
     {
-        ////Task - задача
-        ////Thread - поток
-        ////var thread = new Task<int>(() => Method1(1));
-        ////thread.Start();
-        ////Task thread1 = new Task(() => Method1(2));
-        ////thread1.Start();
-        //////Method1(0);
-        //////thread.Wait();
-        ////Console.WriteLine(thread.Result);
-        ////thread1.Wait();
-        //Console.WriteLine("Start");
-        //var s1 = Method1(1);      
-        //var s2 = Method1(2);       
-        //var s3 = Method1(3);      
-        //var s4 = Method1(4);
+        var connector = new ClickHouseConnector();
+        var res = await connector.ReadData(1);
 
-        //for (int i = 0; i < 10; i++)
-        //{
-        //   Console.WriteLine(i+1);
-        //}
-        //Console.WriteLine(await s1);
-        //Console.WriteLine(await s2);
-        //Console.WriteLine(await s3);
-        //Console.WriteLine(await s4);
-        //Console.WriteLine("Finish");
-        var ts = new CancellationTokenSource(TimeSpan.FromMinutes(1));
-        var token = ts.Token;
-        
-        var ar = Method1();
-        Console.WriteLine(ar);
-        var b = Method2Async(ar);
+        foreach (var item in res)
+        {
+            Console.WriteLine($"{item.UserId} - {item.KeyName} - {item.KeyCode}");
 
-        var cr = Method3();
-        Console.WriteLine(cr);
+            //await connector.WriteData(new UserClicksClickHouseData[] 
+            //{
+            //    new UserClicksClickHouseData() { UserId = 1, KeyName = "first_login_key", KeyCode = null },
+            //    new UserClicksClickHouseData() { UserId = 2, KeyName = "first_login_key", KeyCode = 5 },
+            //    new UserClicksClickHouseData() { UserId = 1, KeyName = "second_login_key", KeyCode = 2 },
+            //    new UserClicksClickHouseData() { UserId = 2, KeyName = "first_login_key", KeyCode = null },
+            //    new UserClicksClickHouseData() { UserId = 1, KeyName = "logout", KeyCode = 5 },
+            //    new UserClicksClickHouseData() { UserId = 2, KeyName = "first_login_key", KeyCode = null },
+            //    new UserClicksClickHouseData() { UserId = 1, KeyName = "second_login_key", KeyCode = 5 },
+            //    new UserClicksClickHouseData() { UserId = 2, KeyName = "first_login_key", KeyCode = null },
+            //    new UserClicksClickHouseData() { UserId = 1, KeyName = "first_login_key", KeyCode = null },
+            //    new UserClicksClickHouseData() { UserId = 1, KeyName = "get_version", KeyCode = null },
 
-        var br = await b;
-        Console.WriteLine(br);
-        var dr = Method4(br, cr);
-        Console.WriteLine(dr);
-
-
+            //});
+        }
     }
-    public static string Method1()
-    {
-        //for (int i = 0; i < 10; i++)
-        //{ 
-        //    Thread.Sleep(1000);
-        //    Console.WriteLine($"{number} - {i+1}");
-        //}
-        //Thread.Sleep(1000);
-        Thread.Sleep(2000);
-        return  $"Неготовое тесто.";
-
-    }
-    public static async Task<string> Method2Async(string str)
-    {        
-        await Task.Delay(1000);
-        return $"Тесто из {str}";
-
-    }
-    public static string Method3()
-    {
-        Thread.Sleep(2000);
-        return $"Фарш";
-
-    }
-    public static string Method4(string str, string str2)
-    {
-        Thread.Sleep(2000);
-        return $"Пельмени = {str} + {str2}";
-
-    }
-
 }

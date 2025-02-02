@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Shared.Cache.Redis.Configuration;
 
 namespace ApplicationWeb.MvcApp
 {
@@ -28,6 +29,7 @@ namespace ApplicationWeb.MvcApp
             });
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRedisCache();
             
             var app = builder.Build();
 
