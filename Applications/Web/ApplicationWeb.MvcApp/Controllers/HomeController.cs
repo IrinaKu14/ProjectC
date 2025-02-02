@@ -18,6 +18,8 @@ namespace ApplicationWeb.MvcApp.Controllers
             return View("Index");
         }
 
+
+
         public IActionResult Privacy()
         {
             return View("Privacy");
